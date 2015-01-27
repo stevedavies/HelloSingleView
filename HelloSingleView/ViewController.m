@@ -20,26 +20,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     int itemsCount=0;
+    int partiallyPlayedCount=0;
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
     NSLog(@"Logging items from a generic query...");
     NSArray *itemsFromGenericQuery = [everything items];
     for (MPMediaItem *item in itemsFromGenericQuery) {
 
-            NSString *itemType = [item valueForProperty:MPMediaItemPropertyMediaType];
+        NSString *itemTitle = [item valueForProperty: MPMediaItemPropertyTitle];
+        NSString *itemBookmarkTime = [item valueForProperty:MPMediaItemPropertyBookmarkTime];
+        double BookmarkValue = [itemBookmarkTime doubleValue];
+        if (BookmarkValue>0)
+        {
+            //NSLog(@"Found Partially Played !! %@-%f",itemTitle,BookmarkValue);
+            partiallyPlayedCount++;
+        };
+        NSString *itemPlaybackDuration = [item valueForProperty:MPMediaItemPropertyPlaybackDuration];
+        NSString *itemPlayCount = [item valueForProperty:MPMediaItemPropertyPlayCount];
+        NSString *itemType = [item valueForProperty:MPMediaItemPropertyMediaType];
+        NSString *itemAlbumTitle = [item valueForProperty:MPMediaItemPropertyAlbumTitle];
             int TypeValue = [[item valueForProperty:MPMediaItemPropertyMediaType] intValue];
+        if(TypeValue == 2 & BookmarkValue>0) {
+            NSLog (@"\nType:%@ Title:%@-%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount);
+        };
 
-            NSString *itemTitle = [item valueForProperty: MPMediaItemPropertyTitle];
-
-            NSString *itemBookmarkTime = [item valueForProperty:MPMediaItemPropertyBookmarkTime];
-
-            //NSTimeInterval *Bookmark = item.bookmarkTime;
-            NSString *itemPlaybackDuration = [item valueForProperty:MPMediaItemPropertyPlaybackDuration];
-            NSString *itemPlayCount = [item valueForProperty:MPMediaItemPropertyPlayCount];
             itemsCount++;
-            NSLog (@"\nType:%@ Title:%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemTitle, itemBookmarkTime
-                   ,itemPlaybackDuration,itemPlayCount);
+        
         }
     NSLog(@"Number of items: %d",itemsCount);
+    NSLog(@"Partially Palyed: %d", partiallyPlayedCount);
 
 }
 
