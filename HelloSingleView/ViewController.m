@@ -22,7 +22,7 @@
     int itemsCount=0;
     int partiallyPlayedCount=0;
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
-    NSLog(@"Logging items from a generic query...");
+    //NSLog(@"Logging items from a generic query...");
     NSArray *itemsFromGenericQuery = [everything items];
     for (MPMediaItem *item in itemsFromGenericQuery) {
 
@@ -40,7 +40,9 @@
         NSString *itemAlbumTitle = [item valueForProperty:MPMediaItemPropertyAlbumTitle];
             int TypeValue = [[item valueForProperty:MPMediaItemPropertyMediaType] intValue];
         if(TypeValue == 2 & BookmarkValue>0) {
-            NSLog (@"\nType:%@ Title:%@-%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount);
+            //NSLog (@"\nType:%@ Title:%@-%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount);
+            //printf("\nType:%s Title:%s-%s Bookmark:%s Duration:%s PlayCount:%s",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount);
+            printf("%s", [[NSString stringWithFormat:@"\nType:%@ Title:%@-%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount] UTF8String]);
         };
 
             itemsCount++;
