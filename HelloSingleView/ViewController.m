@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MediaPlayer/MPMediaItem.h"
 #import "MediaPlayer/MPMediaQuery.h"
+#import "Mediaplayer/MPMediaPlaylist.h"
 
 @interface ViewController ()
 
@@ -21,7 +22,10 @@
     // Do any additional setup after loading the view, typically from a nib.
     int itemsCount=0;
     int partiallyPlayedCount=0;
+    
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
+    
+    NSMutableArray *PlaylistItems= [[NSMutableArray alloc] init];
     //NSLog(@"Logging items from a generic query...");
     NSArray *itemsFromGenericQuery = [everything items];
     for (MPMediaItem *item in itemsFromGenericQuery) {
@@ -43,11 +47,19 @@
             //NSLog (@"\nType:%@ Title:%@-%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount);
             //printf("\nType:%s Title:%s-%s Bookmark:%s Duration:%s PlayCount:%s",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount);
             printf("%s", [[NSString stringWithFormat:@"\nType:%@ Title:%@-%@ Bookmark:%@ Duration:%@ PlayCount:%@",itemType, itemAlbumTitle, itemTitle, itemBookmarkTime,itemPlaybackDuration,itemPlayCount] UTF8String]);
+            [PlaylistItems addObject:item];
+            partiallyPlayedCount++;
         };
-
-            itemsCount++;
+        
+        //[PartiallyPlayedList MPMediaPlaylistPropertyName:@"Test"];
+        itemsCount++;
+        // create a playlist here
+        //PartiallyPlayedList
         
         }
+    // ADD itme to a playlist here
+    MPMediaPlaylist *PartiallyPlayedList=[[MPMediaPlaylist alloc] initWithItems:PlaylistItems];
+
     NSLog(@"Number of items: %d",itemsCount);
     NSLog(@"Partially Palyed: %d", partiallyPlayedCount);
 
