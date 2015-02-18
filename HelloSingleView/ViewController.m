@@ -85,7 +85,7 @@
     //[[NSUserDefaults standardUserDefaults] setObject:data forKey:@"songsList"];
     
     //[[NSUserDefaults standardUserDefaults] synchronize];
-    MPMusicPlayerController *myPlayer = [MPMusicPlayerController applicationMusicPlayer];
+    MPMusicPlayerController  *myPlayer = [MPMusicPlayerController applicationMusicPlayer];
     [myPlayer setQueueWithItemCollection:PartiallyPlayedList];
     [myPlayer setShuffleMode: MPMusicShuffleModeSongs];
     [myPlayer play];
