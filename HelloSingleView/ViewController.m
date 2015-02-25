@@ -55,41 +55,33 @@
         
         //[PartiallyPlayedList MPMediaPlaylistPropertyName:@"Test"];
         itemsCount++;
-
-
         }
 
     // create a playlist here
     //PartiallyPlayedList
-    MPMediaPlaylist *PartiallyPlayedList=[[MPMediaPlaylist alloc] initWithItems:PlaylistItems];
+    MPMediaItemCollection *PartiallyPlayedList=[[MPMediaItemCollection alloc] initWithItems:PlaylistItems];
 
     NSLog(@"Number of items: %d",itemsCount);
     NSLog(@"Partially Palyed: %d", partiallyPlayedCount);
     
     // trying to save a playlist
-    
     //NSArray* items = [MPMediaItemCollection items];
-    
+    /*
     NSMutableArray* listToSave = [[NSMutableArray alloc] initWithCapacity:0];
-    
     for (MPMediaItem *song in PlaylistItems) {
-        
         NSNumber *persistentId = [song valueForProperty:MPMediaItemPropertyPersistentID];
-        
         [listToSave addObject:persistentId];
-        
-    }
-    
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject: listToSave];
-    
+    }*/
+    //NSData *data = [NSKeyedArchiver archivedDataWithRootObject: listToSave];
     //[[NSUserDefaults standardUserDefaults] setObject:data forKey:@"songsList"];
-    
     //[[NSUserDefaults standardUserDefaults] synchronize];
+    
     MPMusicPlayerController  *myPlayer = [MPMusicPlayerController applicationMusicPlayer];
     [myPlayer setQueueWithItemCollection:PartiallyPlayedList];
-    [myPlayer setShuffleMode: MPMusicShuffleModeSongs];
+    //[myPlayer setShuffleMode: MPMusicShuffleModeSongs];
     [myPlayer play];
-    [myPlayer stop];
+    [myPlayer skipToNextItem];
+    //[myPlayer stop];
     // trying to save a playlist
 }
 
