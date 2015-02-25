@@ -27,7 +27,11 @@
     //----- LIST ALL PLAYLISTS -----
     MPMediaQuery *myPlaylistsQuery = [MPMediaQuery playlistsQuery];
     NSArray *playlists = [myPlaylistsQuery collections];
-    
+
+    // experimenting with WRITING to playlist in playlists
+    //MPMediaPlaylist *playlist=[playlists objectAtIndex:(0)];
+
+     
     for (MPMediaPlaylist *playlist in playlists)
     {
         NSLog (@"%@", [playlist valueForProperty: MPMediaPlaylistPropertyName]);
