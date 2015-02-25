@@ -21,6 +21,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    // SD enumerating playlists
+    //----- LIST ALL PLAYLISTS -----
+    MPMediaQuery *myPlaylistsQuery = [MPMediaQuery playlistsQuery];
+    NSArray *playlists = [myPlaylistsQuery collections];
+    
+    for (MPMediaPlaylist *playlist in playlists)
+    {
+        NSLog (@"%@", [playlist valueForProperty: MPMediaPlaylistPropertyName]);
+        NSArray *songs = [playlist items];
+        for (MPMediaItem *song in songs)
+        {
+            NSString *songTitle = [song valueForProperty: MPMediaItemPropertyTitle];
+            NSLog (@"\t\t%@", songTitle);
+            //NSLog (@"\t\t\t%@", [song valueForProperty: MPMediaItemPropertyPersistentID]);
+        }
+        
+    }
+    
+    // SD building items for play (list / queue)
     int itemsCount=0;
     int partiallyPlayedCount=0;
     
